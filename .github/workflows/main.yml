@@ -16,3 +16,4 @@ jobs:
         gem install bundler -v 2.2.11
         bundle install
         bundle exec rake
+        bundle exec rspec
