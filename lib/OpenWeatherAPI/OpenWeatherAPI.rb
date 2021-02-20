@@ -16,6 +16,11 @@ module OpenWeatherApi
       JSON.parse(get(url, @params).body)
     end
 
+    def forecast
+      url = URL+'forecast'
+      JSON.parse(get(url, @params).body)
+    end
+
     protected
 
     def get(url, params)
