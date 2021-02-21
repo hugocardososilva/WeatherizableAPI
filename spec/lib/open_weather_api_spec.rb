@@ -1,4 +1,4 @@
-require 'OpenWeatherAPI/OpenWeatherAPI'
+require 'open_weather_api/open_weather_api'
 #require 'OpenWeatherAPI'
 
 RSpec.describe OpenWeatherApi::OpenWeatherApi do
