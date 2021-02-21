@@ -1,5 +1,6 @@
 require 'faraday'
 require 'json'
+require 'open_weather_api/weather'
 
 module OpenWeatherApi
   class OpenWeatherApi
@@ -13,7 +14,7 @@ module OpenWeatherApi
 
     def weather
       url = URL+'weather'
-      JSON.parse(get(url, @params).body)
+      ::OpenWeatherApi::Weather.new.from_json(get(url, @params).body)
     end
 
     def forecast
