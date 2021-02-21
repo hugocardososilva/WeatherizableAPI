@@ -1,6 +1,7 @@
 require 'faraday'
 require 'json'
 require 'open_weather_api/weather'
+require 'open_weather_api/forecast'
 
 module OpenWeatherApi
   class OpenWeatherApi
@@ -19,7 +20,9 @@ module OpenWeatherApi
 
     def forecast
       url = URL+'forecast'
-      JSON.parse(get(url, @options).body)
+      @forecast = ::OpenWeatherApi::Forecast.new.from_json(get(url, @options).body)
+      @forecast.params = @options
+      @forecast
     end
 
     protected
