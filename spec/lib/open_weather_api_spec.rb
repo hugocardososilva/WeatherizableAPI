@@ -55,9 +55,9 @@ RSpec.describe OpenWeatherApi::OpenWeatherApi do
         lang:'pt_br',
         appid: 'c26591317877a7d9348e3b745aee5b8b'
       }
-      response = OpenWeatherApi::OpenWeatherApi.new(params).forecast
-      expect(response['cod']).to eq("404")
-      expect(response['message']).to eq('city not found')
+      forecast = OpenWeatherApi::OpenWeatherApi.new(params).forecast
+      expect(forecast.cod).to eq("404")
+      expect(forecast.error).to eq('city not found')
     end
   end
 end
