@@ -5,7 +5,7 @@ module OpenWeatherApi
     include ActiveModel::Serializers::JSON
 
     attr_accessor :id, :coord, :weather, :main, :base, :visibility, :wind,
-    :clouds, :dt, :sys, :timezone, :name, :cod
+    :clouds, :dt, :sys, :timezone, :name, :cod, :message
 
     def attributes=(hash)
       hash.each do |key, value|
