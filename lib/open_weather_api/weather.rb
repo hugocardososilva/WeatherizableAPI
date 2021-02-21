@@ -16,5 +16,18 @@ module OpenWeatherApi
     def attributes
       instance_values
     end
+
+    def error?
+      true unless cod.eq 200
+    end
+
+    def error
+      message
+    end
+
+    def temperature
+      main['temp'].to_f
+    end
+
   end
 end
