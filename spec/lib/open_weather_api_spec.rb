@@ -11,9 +11,10 @@ RSpec.describe OpenWeatherApi::OpenWeatherApi do
       }
     end
     it 'check existing weather' do
-      response = OpenWeatherApi::OpenWeatherApi.new(@params).weather
-      expect(response['cod']).to eq(200)
-      expect(response['sys']['country']).to eq('BR')
+      @weather = OpenWeatherApi::OpenWeatherApi.new(@params).weather
+      expect(@weather.cod).to eq(200)
+      expect(@weather.temperature).to_not eq(nil)
+      expect(@weather.error).to eq(nil)
     end
 
     it 'check non existing weather' do
@@ -22,9 +23,9 @@ RSpec.describe OpenWeatherApi::OpenWeatherApi do
         units:'metric',
         lang:'pt_br'
       }
-      response = OpenWeatherApi::OpenWeatherApi.new(params).weather
-      expect(response['cod']).to eq("404")
-      expect(response['message']).to eq('city not found')
+      @weather = OpenWeatherApi::OpenWeatherApi.new(params).weather
+      expect(@weather.cod).to eq("404")
+      expect(@weather.error).to eq('city not found')
     end
   end
 
