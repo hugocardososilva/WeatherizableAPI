@@ -40,10 +40,12 @@ RSpec.describe OpenWeatherApi::OpenWeatherApi do
         appid: 'c26591317877a7d9348e3b745aee5b8b'
       }
     end
+
     it 'check existing forecast' do
-      response = OpenWeatherApi::OpenWeatherApi.new(@params).forecast
-      expect(response['cod']).to eq("200")
-      expect(response['city']['country']).to eq('BR')
+      forecast = OpenWeatherApi::OpenWeatherApi.new(@params).forecast
+      expect(forecast.cod).to eq("200")
+      expect(forecast.week_list.count).to eq(5)
+      expect(forecast.city['country']).to eq('BR')
     end
 
     it 'check non existing forecast' do
