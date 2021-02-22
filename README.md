@@ -1,8 +1,8 @@
 # WeatherizableAPI
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/weatherizableAPI`. To experiment with that code, run `bin/console` for an interactive prompt.
+This is a gem that aims to receive weather information according to the search options.
 
-TODO: Delete this and the text above, and describe your gem
+The main feature is to receive a descriptive text containing the current temperature and the weather forecast for the next 5 days. So you can prepare yourself and not be caught off guard by weather changes
 
 ## Installation
 
@@ -22,7 +22,24 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+First you need to create an account on [openweathermap](https://openweathermap.org/) and create an [API key](https://home.openweathermap.org/api_keys)
+
+```ruby
+require 'open_weather_api/messageable'
+
+params = {
+  q: 'São Paulo',
+  units:'metric', # metric for ºC, imperial for ºF
+  lang:'pt_br',
+  appid: 'YOUR_API_KEY'
+}
+messageable = OpenWeatherApi::Messageable.new(@params)
+messageable.prevision
+=> "26.9ºC e nublado em 22/02. Média para os proximos dias: 66.3ºC em 23/02, 68.5ºC em 24/02, 62.2ºC em 25/02, 58.1ºC em 26/02, 35.9ºC em 27/02.  "
+
+```
+
+###Note: In this release we only have answers in Brazilian Portuguese
 
 ## Development
 
@@ -37,7 +54,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/[USERN
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
-
-## Code of Conduct
-
-Everyone interacting in the WeatherizableAPI project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/weatherizableAPI/blob/master/CODE_OF_CONDUCT.md).
