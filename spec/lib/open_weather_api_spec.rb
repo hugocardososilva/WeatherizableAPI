@@ -1,4 +1,4 @@
-require 'OpenWeatherAPI/OpenWeatherAPI'
+require 'open_weather_api/open_weather_api'
 #require 'OpenWeatherAPI'
 
 RSpec.describe OpenWeatherApi::OpenWeatherApi do
@@ -7,24 +7,61 @@ RSpec.describe OpenWeatherApi::OpenWeatherApi do
       @params = {
         q: 'São Paulo',
         units:'metric',
-        lang:'pt_br'
+        lang:'pt_br',
+        appid: 'c26591317877a7d9348e3b745aee5b8b'
       }
     end
     it 'check existing weather' do
-      response = OpenWeatherApi::OpenWeatherApi.new(@params).weather
-      expect(response['cod']).to eq(200)
-      expect(response['sys']['country']).to eq('BR')
+      @weather = OpenWeatherApi::OpenWeatherApi.new(@params).weather
+      expect(@weather.cod).to eq(200)
+      expect(@weather.temperature).to_not eq(nil)
+      expect(@weather.error).to eq(nil)
     end
 
     it 'check non existing weather' do
       params = {
         q: 'xyz',
         units:'metric',
-        lang:'pt_br'
+        lang:'pt_br',
+        appid: 'c26591317877a7d9348e3b745aee5b8b'
       }
-      response = OpenWeatherApi::OpenWeatherApi.new(params).weather
-      expect(response['cod']).to eq("404")
-      expect(response['message']).to eq('city not found')
+      @weather = OpenWeatherApi::OpenWeatherApi.new(params).weather
+      expect(@weather.cod).to eq("404")
+      expect(@weather.error).to eq('city not found')
+    end
+  end
+
+  context 'forecast' do
+    before do
+      @params = {
+        q: 'São Paulo',
+        units:'metric',
+        lang:'pt_br',
+        appid: 'c26591317877a7d9348e3b745aee5b8b'
+      }
+      @forecast = OpenWeatherApi::OpenWeatherApi.new(@params).forecast
+    end
+
+    it 'check existing forecast' do
+      expect(@forecast.cod).to eq("200")
+      expect(@forecast.city['country']).to eq('BR')
+    end
+
+    it 'check average temperature' do
+      expect(@forecast.average_temperature(Date.today + 1).class).to eq(Float)
+      expect(@forecast.average_temperature(Date.today + 1)).to_not eq(0.0)
+    end
+
+    it 'check non existing forecast' do
+      params = {
+        q: 'xyz',
+        units:'metric',
+        lang:'pt_br',
+        appid: 'c26591317877a7d9348e3b745aee5b8b'
+      }
+      forecast = OpenWeatherApi::OpenWeatherApi.new(params).forecast
+      expect(forecast.cod).to eq("404")
+      expect(forecast.error).to eq('city not found')
     end
   end
 end
