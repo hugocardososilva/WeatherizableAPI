@@ -5,7 +5,7 @@ module OpenWeatherApi
   class Forecast
     include ActiveModel::Serializers::JSON
 
-    attr_accessor :id, :params, :attributes, :cod, :message, :cnt, :list, :city
+    attr_accessor :id, :params, :attributes, :cod, :message, :cnt, :list, :city, :main
 
 
     def attributes=(hash)
@@ -27,8 +27,29 @@ module OpenWeatherApi
     end
 
     def week_list
-      list.shift
-      list.first(5)
+      list.first(6).drop(1)
+    end
+
+    def split_day(date)
+      day = []
+      list.each do |item|
+        if convert_date(item['dt']) == date
+          day << item
+        end
+      end
+      day
+    end
+
+    def average_temperature(date)
+      temp = 0
+      split_day(date).each do |item|
+        temp += item['main']['temp']
+      end
+      (temp / split_day(Date.today).count).round(1)
+    end
+
+    def convert_date(timestamp)
+      Time.at(timestamp).to_date
     end
 
   end
