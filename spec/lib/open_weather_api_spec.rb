@@ -39,13 +39,17 @@ RSpec.describe OpenWeatherApi::OpenWeatherApi do
         lang:'pt_br',
         appid: 'c26591317877a7d9348e3b745aee5b8b'
       }
+      @forecast = OpenWeatherApi::OpenWeatherApi.new(@params).forecast
     end
 
     it 'check existing forecast' do
-      forecast = OpenWeatherApi::OpenWeatherApi.new(@params).forecast
-      expect(forecast.cod).to eq("200")
-      expect(forecast.week_list.count).to eq(5)
-      expect(forecast.city['country']).to eq('BR')
+      expect(@forecast.cod).to eq("200")
+      expect(@forecast.city['country']).to eq('BR')
+    end
+
+    it 'check average temperature' do
+      expect(@forecast.average_temperature(Date.today + 1).class).to eq(Float)
+      expect(@forecast.average_temperature(Date.today + 1)).to_not eq(0.0)
     end
 
     it 'check non existing forecast' do
