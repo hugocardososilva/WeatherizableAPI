@@ -26,10 +26,6 @@ module OpenWeatherApi
       message
     end
 
-    def week_list
-      list.first(6).drop(1)
-    end
-
     def split_day(date)
       day = []
       list.each do |item|
