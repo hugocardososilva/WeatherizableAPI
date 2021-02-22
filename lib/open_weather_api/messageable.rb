@@ -42,7 +42,7 @@ module OpenWeatherApi
     end
 
     def temp_now
-      "#{weather.main['temp'].round(1)}#{temp_type} e #{weather.weather.last['description']} em #{forecast.convert_date(weather.dt)}"
+      "#{weather.main['temp'].round(1)}#{temp_type} e #{weather.weather.last['description']} em #{forecast.convert_date(weather.dt).strftime("%d/%m")}"
     end
 
     #FIXME: workarround to be fixed
@@ -53,8 +53,8 @@ module OpenWeatherApi
         message += forecast.average_temperature(date).to_s
         message += temp_type
         message += " em "
-        message += date.to_s
-        message += "#{t == 5 ? '.' : ',' } "
+        message += date.strftime("%d/%m").to_s
+        message += "#{t == 4 ? '.' : ',' } "
       end
       message
     end
