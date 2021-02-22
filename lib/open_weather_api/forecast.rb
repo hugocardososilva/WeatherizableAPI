@@ -27,6 +27,7 @@ module OpenWeatherApi
     end
 
     def week_list
+      list.shift
       list.first(5)
     end
 
