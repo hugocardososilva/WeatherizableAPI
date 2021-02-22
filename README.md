@@ -35,7 +35,7 @@ params = {
 }
 messageable = OpenWeatherApi::Messageable.new(@params)
 messageable.prevision
-=> "20.5ºC e nublado em 2021-02-22. Média para os proximos dias: 33.1ºC em 2021-02-23, 33.4ºC em 2021-02-24, 30.9ºC em 2021-02-25, 29.6ºC em 2021-02-26, 6.6ºC em 2021-02-27,  "
+=> "26.9ºC e nublado em 22/02. Média para os proximos dias: 66.3ºC em 23/02, 68.5ºC em 24/02, 62.2ºC em 25/02, 58.1ºC em 26/02, 35.9ºC em 27/02.  "
 
 ```
 
