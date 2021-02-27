@@ -5,7 +5,7 @@ module OpenWeatherApi
   class Forecast
     include ActiveModel::Serializers::JSON
 
-    attr_accessor :id, :params, :attributes, :cod, :message, :cnt, :list, :city, :main
+    attr_accessor :id, :params, :attributes, :cod, :message, :cnt, :list, :city, :main, :rain
 
 
     def attributes=(hash)
