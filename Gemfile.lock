@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    weatherizableAPI (0.1.0)
+    weatherizableAPI (0.1.2)
 
 GEM
   remote: https://rubygems.org/
