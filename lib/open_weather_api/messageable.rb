@@ -42,7 +42,7 @@ module OpenWeatherApi
     end
 
     def temp_now
-      "#{weather.main['temp'].round(1)}#{temp_type} e #{weather.weather.last['description']} em #{forecast.convert_date(weather.dt).strftime("%d/%m")}"
+      "#{weather.main['temp'].round(1)}#{temp_type} e #{weather.weather.last['description']} em #{weather.name} em  #{forecast.convert_date(weather.dt).strftime("%d/%m")}"
     end
 
     #FIXME: workarround to be fixed
