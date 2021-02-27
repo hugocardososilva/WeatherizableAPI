@@ -41,7 +41,7 @@ module OpenWeatherApi
       split_day(date).each do |item|
         temp += item['main']['temp']
       end
-      (temp / split_day(Date.today).count).round(1)
+      (temp / split_day(date).count).round(1)
     end
 
     def convert_date(timestamp)
